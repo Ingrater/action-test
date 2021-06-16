@@ -21,7 +21,7 @@ jobs:
         shell: pwsh
         run: |
           git fetch
-          #git checkout test
+          git checkout test
 
           function exec
           {
