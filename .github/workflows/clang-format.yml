@@ -23,6 +23,10 @@ jobs:
           echo GITHUB_WORKSPACE = $GITHUB_WORKSPACE
           echo GITHUB_REPOSITORY = $GITHUB_REPOSITORY
 
+      - name: DetectFork
+        if: ${{ github.event.pull_request.head.repo.full_name != 'org/repo' }}
+        run: echo "It is a fork!"
+
       - name: Format pwsh
         shell: pwsh
         run: |
