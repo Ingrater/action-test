@@ -17,7 +17,9 @@ jobs:
       - name: Run a one-line script
         run: echo Hello, world!
 
-      - name: Run a multi-line script
+      - name: Format
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          COMMIT = git merge-base HEAD origin/main
+          echo $COMMIT
+          DIFF = git diff $COMMIT..HEAD -U0 --no-color -- *
+          echo $DIFF
