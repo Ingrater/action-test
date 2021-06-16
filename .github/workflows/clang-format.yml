@@ -17,6 +17,32 @@ jobs:
       - name: Run a one-line script
         run: echo Hello, world!
 
+      - name: Format pwsh
+        shell: pwsh
+        run: |
+          git fetch origin main
+
+          function exec
+          {
+              [CmdletBinding()]
+              param(
+                  [Parameter(Position=0,Mandatory=1)][scriptblock]$cmd,
+                  [Parameter(Position=1,Mandatory=0)][string]$errorMessage = ("Error executing command {0}" -f $cmd)
+              )
+              & $cmd
+              if ($lastexitcode -ne 0)
+              {
+                  throw ("Exec: " + $errorMessage)
+              }
+          }
+
+          $baseCommit = exec({git merge-base HEAD origin/main})
+
+          $diff = exec { "git diff $baseCommit..HEAD -U0 --no-color -- *" }
+
+          echo $diff
+          
+
       - name: Format
         shell: bash
         run: |
@@ -27,6 +53,8 @@ jobs:
           echo "stuff"
           git merge-base HEAD origin/main
           COMMIT=`git merge-base HEAD origin/main`
+          echo "after merge"
           echo $COMMIT
           DIFF=`git diff $COMMIT..HEAD -U0 --no-color -- *`
+          echo "after diff"
           echo $DIFF
