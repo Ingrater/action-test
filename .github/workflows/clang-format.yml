@@ -20,8 +20,8 @@ jobs:
       - name: Format pwsh
         shell: pwsh
         run: |
-          git fetch origin main
-          git checkout test
+          git fetch
+          #git checkout test
 
           function exec
           {
