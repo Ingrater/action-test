@@ -24,7 +24,7 @@ jobs:
           echo GITHUB_REPOSITORY = $GITHUB_REPOSITORY
 
       - name: DetectFork
-        if: github.event.pull_request.head.repo.full_name == github.repository
+        if: github.event.pull_request.head.repo.full_name != github.repository
         run: |
           echo "It is a fork!"
           echo ${{ github.event.pull_request.head.repo.full_name }}
