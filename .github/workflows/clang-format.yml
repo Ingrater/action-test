@@ -42,7 +42,7 @@ jobs:
           $baseCommit = exec({git merge-base HEAD origin/main})
           echo $baseCommit
 
-          $diff = exec { git diff "$baseCommit..HEAD" -U0 --no-color }
+          $diff = exec { git diff "$baseCommit..HEAD" -U0 --no-color -- "*.cpp" "*.h" "*.inl" }
           echo $diff
           
 
