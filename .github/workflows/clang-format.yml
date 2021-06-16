@@ -20,7 +20,11 @@ jobs:
       - name: Format
         shell: bash
         run: |
+          echo "fetch"
+          git fetch origin main
+          echo "branch -a"
           git branch -a
+          echo "stuff"
           COMMIT=`git merge-base HEAD remotes/origin/main`
           echo $COMMIT
           DIFF=`git diff $COMMIT..HEAD -U0 --no-color -- *`
