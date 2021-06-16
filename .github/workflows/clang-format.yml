@@ -28,7 +28,7 @@ jobs:
           git fetch origin "${env:GITHUB_BASE_REF}:refs/remotes/origin/${env:GITHUB_BASE_REF}"
           git fetch origin "${env:GITHUB_HEAD_REF}:refs/remotes/origin/${env:GITHUB_HEAD_REF}"
 
-          git checkout "origin/$GITHUB_HEAD_REF"
+          git checkout "origin/${env:GITHUB_HEAD_REF}"
           
           function exec
           {
