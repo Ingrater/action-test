@@ -15,7 +15,12 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Run a one-line script
-        run: echo Hello, world!
+        run: |
+          echo GITHUB_REF = $GITHUB_REF
+          echo GITHUB_HEAD_REF = $GITHUB_HEAD_REF
+          echo GITHUB_BASE_REF = $GITHUB_BASE_REF
+          echo GITHUB_SHA = $GITHUB_SHA
+          echo GITHUB_WORKSPACE = $GITHUB_WORKSPACE
 
       - name: Format pwsh
         shell: pwsh
@@ -45,19 +50,3 @@ jobs:
           $diff = exec { git diff "$baseCommit..HEAD" -U0 --no-color -- "*.cpp" "*.h" "*.inl" }
           echo $diff
           
-
-      - name: Format
-        shell: bash
-        run: |
-          echo "fetch"
-          git fetch origin main
-          echo "branch -a"
-          git branch -a
-          echo "stuff"
-          git merge-base HEAD origin/main
-          COMMIT=`git merge-base HEAD origin/main`
-          echo "after merge"
-          echo $COMMIT
-          DIFF=`git diff $COMMIT..HEAD -U0 --no-color -- *`
-          echo "after diff"
-          echo $DIFF
