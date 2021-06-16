@@ -20,7 +20,7 @@ jobs:
       - name: Format
         shell: bash
         run: |
-          COMMIT=git merge-base HEAD origin/main
+          COMMIT=`git merge-base HEAD origin/main`
           echo $COMMIT
-          DIFF=git diff $COMMIT..HEAD -U0 --no-color -- *
+          DIFF=`git diff $COMMIT..HEAD -U0 --no-color -- *`
           echo $DIFF
